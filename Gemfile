@@ -46,4 +46,4 @@ group :development do
 end
 
 gem 'hirb'
-gem 'rails-footnotes'
+# gem 'rails-footnotes'
