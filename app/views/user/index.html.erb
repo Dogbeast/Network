@@ -1,0 +1,38 @@
+<h1>Hi <%= @user.name %></h1>
+Here is your profile description:
+<div id="description">
+	<%= @user.description %>
+</div>
+Your Professional Network:
+<div id="network" style='overflow-y:auto; width:200px;height:200px;'>
+<% if @mynetwork %>
+	<% @mynetwork.each do |p| %>
+		<% if p.user.id == session[:user_id] or p.friend.id == session[:user_id] %>
+			<% if p.user.id == session[:user_id] %>
+				<p><a href="/users/<%= p.friend.id %>"><%= p.friend.name %></a> - <a href="/remove/<%= p.id %>">Remove</a></p>
+			<% end %>
+			<% if p.friend.id == session[:user_id] %>
+				<p><a href="/users/<%= p.user.id %>"><%= p.user.name %></a> - <a href="/remove/<%= p.id %>">Remove</a></p>
+			<% end %>
+		<% end %>
+	<% end %>
+<% end %>
+</div>
+Invitations:
+The following people asked you to be their network:
+<div id="network" style='overflow-y:auto; width:400px;height:300px;'>
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Action</th>
+	</tr>
+	<% if @askingnetwork %>
+		<% @askingnetwork.each do |p| %>
+			<% if p.user.id == session[:user_id] or p.friend.id == session[:user_id] %>
+			<td><a href="/users/<%= p.user.id %>"><%= p.user.name %></a></td>
+			<td><a href="/accept/<%= p.id %>">Accept Invite</a> <a href="/ignore/<%= p.id %>">Ignore</a></td>
+			<% end %>
+		<% end %>
+	<% end %>
+</table>
+</div>

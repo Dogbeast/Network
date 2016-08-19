@@ -1,0 +1,15 @@
+<h1>Users you may want to connect with:</h1>
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Action</th>
+	</tr>
+	<% @users.each do |p| %>
+		<% if p.id != session[:user_id] %>
+			<tr>
+				<td><a href="/users/<%= p.id %>"><%= p.name %></a></td>
+				<td><a href="/connect/<%= p.id %>">Connect</a></td>
+			</tr>
+		<% end %>
+	<% end %>
+</table>

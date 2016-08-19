@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ProfessionalNetwork</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div align="right">
+  <% if session[:user_id] != nil %>
+    <% if request.original_fullpath != "/index" %>
+      <a href="/index">My Profile</a>
+    <% end %>
+    <% if request.original_fullpath != "/users" %>
+      <a href="/users">All Users</a>
+    <% end %>
+    <a href="/logout">Logout</a>
+  <% end %>
+</div>
+
+<% if flash[:message] or flash[:error] %>
+	<%= flash[:message] %>
+	<%= flash[:error] %>
+<% end %>
+
+<%= yield %>
+
+</body>
+</html>
